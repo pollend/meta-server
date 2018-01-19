@@ -46,8 +46,8 @@ import org.terasology.module.ResolutionResult;
 import org.terasology.module.TableModuleRegistry;
 import org.terasology.naming.Name;
 import org.terasology.naming.Version;
-import org.terasology.web.artifactory.ArtifactInfo;
-import org.terasology.web.artifactory.ArtifactRepository;
+import org.terasology.web.services.artifactory.ArtifactInfo;
+import org.terasology.web.services.artifactory.ArtifactRepository;
 
 import com.google.common.io.Files;
 

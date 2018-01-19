@@ -17,8 +17,8 @@
 package org.terasology.master;
 
 import java.io.IOException;
-import org.terasology.web.geo.GeoLocation;
-import org.terasology.web.geo.GeoLocationService;
+import org.terasology.web.services.geo.GeoLocation;
+import org.terasology.web.services.geo.GeoLocationService;
 
 /**
  * A dummy implementation of {@link GeoLocationService}.

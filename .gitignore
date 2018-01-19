@@ -1,12 +1,45 @@
 /src/main/java/org/terasology/web/version/
 
-/build/
-.gradle
+# Ignore general
+/.*
+!.gitignore
+*~
+._*
+*.bak
 
-/logs/
+# Ignore Gradle
+/.gradle/
+build/
+/src/generated
+logs/
 
-# eclipse
-/.classpath
-/.project
-/.settings/
-/bin/
+# Ignore IntelliJ - could use "/**/*.iml" to catch all .iml files, but that requires a somewhat recent Git version
+/out/
+/*.iml
+/*.ipr
+/*.iws
+
+
+# Ignore Eclipse
+.checkstyle
+.project
+.classpath
+.settings/
+bin/
+
+# Ignore Linux
+*.directory
+
+#Ignore OSX
+Icon#Ignore Windows
+ehthumbs.db
+Thumbs.db
+
+# Ignore weird stuff that might be obsolete
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+
+/config.yml
+/target/

@@ -29,18 +29,18 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.rules.TemporaryFolder;
 import org.terasology.web.JettyMain;
-import org.terasology.web.artifactory.ArtifactRepository.RepoType;
+import org.terasology.web.services.artifactory.ArtifactRepository.RepoType;
 import org.terasology.web.db.DataBase;
 import org.terasology.web.db.JooqDatabase;
-import org.terasology.web.geo.GeoLocation;
-import org.terasology.web.geo.GeoLocationService;
+import org.terasology.web.services.geo.GeoLocation;
+import org.terasology.web.services.geo.GeoLocationService;
 import org.terasology.web.model.ModuleListModelImpl;
 import org.terasology.web.model.ServerEntry;
 import org.terasology.web.model.ServerListModel;
 import org.terasology.web.model.ServerListModelImpl;
-import org.terasology.web.servlet.AboutServlet;
-import org.terasology.web.servlet.ModuleServlet;
-import org.terasology.web.servlet.ServerServlet;
+import org.terasology.web.resources.AboutResource;
+import org.terasology.web.resources.ModuleServlet;
+import org.terasology.web.resources.ServerResource;
 
 public abstract class WebServerBasedTests {
 
@@ -95,8 +95,8 @@ public abstract class WebServerBasedTests {
         ServerListModel serverListModel = new ServerListModelImpl(dataBase, SERVER_TABLE, secret);
 
         webServer = JettyMain.createServer(PORT,
-                new AboutServlet(),
-                new ServerServlet(serverListModel),          // the server list servlet
+                new AboutResource(),
+                new ServerResource(serverListModel),          // the server list servlet
                 new ModuleServlet(moduleListModel));         // the module list servlet
 
         webServer.start();

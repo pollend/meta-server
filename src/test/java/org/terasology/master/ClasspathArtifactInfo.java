@@ -26,7 +26,7 @@ import java.util.Date;
 import org.terasology.module.ModuleMetadata;
 import org.terasology.module.ModuleMetadataJsonAdapter;
 import org.terasology.module.RemoteModuleExtension;
-import org.terasology.web.artifactory.ArtifactInfo;
+import org.terasology.web.services.artifactory.ArtifactInfo;
 
 public class ClasspathArtifactInfo implements ArtifactInfo {
 

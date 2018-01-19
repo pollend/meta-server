@@ -23,8 +23,8 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.terasology.web.artifactory.ArtifactInfo;
-import org.terasology.web.artifactory.ArtifactRepository;
+import org.terasology.web.services.artifactory.ArtifactInfo;
+import org.terasology.web.services.artifactory.ArtifactRepository;
 
 public class DummyArtifactRepo implements ArtifactRepository {
 

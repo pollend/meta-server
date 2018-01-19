@@ -22,7 +22,7 @@ import org.h2.jdbcx.JdbcDataSource;
 import org.junit.Assert;
 import org.junit.Test;
 import org.terasology.web.db.JooqDatabase;
-import org.terasology.web.geo.GeoLocationService;
+import org.terasology.web.services.geo.GeoLocationService;
 
 public class JooqDbTest {
 
