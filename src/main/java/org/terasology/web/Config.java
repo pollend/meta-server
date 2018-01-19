@@ -20,6 +20,16 @@ public class Config extends Configuration {
     @JsonProperty("flyway")
     private FlywayFactory flyway = new FlywayFactory();
 
+    @Valid
+    @NotNull
+    @JsonProperty("geokey")
+    private String geoKey;
+
+    @Valid
+    @NotNull
+    @JsonProperty("secrete")
+    private String serverSecrete;
+
     public FlywayFactory getFlyway() {
         return flyway;
     }
@@ -28,5 +38,12 @@ public class Config extends Configuration {
         return database;
     }
 
+    public String getServerSecrete() {
+        return serverSecrete;
+    }
+
+    public String getGeoKey() {
+        return geoKey;
+    }
 }
 

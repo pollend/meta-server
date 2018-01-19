@@ -1,9 +1,7 @@
 package org.terasology.web;
 
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import io.dropwizard.Application;
-import io.dropwizard.auth.AuthDynamicFeature;
-import io.dropwizard.auth.AuthValueFactoryProvider;
+import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.flyway.FlywayBundle;
 import io.dropwizard.flyway.FlywayFactory;
@@ -12,8 +10,8 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.jersey.protobuf.ProtobufBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
-import org.terasology.web.dao.DataAccessObjectModule;
+import org.terasology.web.core.User;
+import org.terasology.web.db.DataAccessObjectModule;
 import org.terasology.web.services.ServiceModule;
 
 
@@ -65,6 +63,12 @@ public class App extends Application<Config> {
                 .dataAccessObjectModule(new DataAccessObjectModule(hibernateBundle))
                 .serviceModule(new ServiceModule(configuration, environment)).build();
 
+//        environment.jersey().register(new BasicCredentialAuthFilter());
+
+        environment.jersey().register(core.moduleResource());
+        environment.jersey().register(core.serverResource());
+
+//        environment.jersey().
         //register jersy
 //        environment.jersey().register(core.userResource());
 
@@ -79,6 +83,8 @@ public class App extends Application<Config> {
 //                .setAuthorizer(new AffiliateAuthorize())
 //                .setPrefix("Bearer")
 //                .buildAuthFilter()));
+
+
 
 
 //        environment.jersey().register(RolesAllowedDynamicFeature.class);

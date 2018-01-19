@@ -42,7 +42,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
- * Implements {@link ArtifactRepository} for Artifactory.
+ * Implements {@link ArtifactRepository} for TeraArtifactory.
  */
 public final class ArtifactoryRepo implements ArtifactRepository {
 

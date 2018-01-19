@@ -22,7 +22,7 @@ import java.util.Date;
 import com.google.common.base.Preconditions;
 
 /**
- * Describes a module based on its URL in Artifactory.
+ * Describes a module based on its URL in TeraArtifactory.
  */
 public class ArtifactoryArtifactInfo implements ArtifactInfo {
     private final String artifact;

@@ -25,8 +25,20 @@ public class TeraServerDAO extends AbstractDAO<TeraServer> {
         return get(id);
     }
 
-    public List findAll() {
+    public List<TeraServer> findAll() {
         return list(namedQuery("org.terasology.web.core.TeraServer.findAll"));
     }
 
+
+    public void delete(TeraServer person) {
+        currentSession().delete(person);
+    }
+
+    public void update(TeraServer person) {
+        currentSession().saveOrUpdate(person);
+    }
+
+    public TeraServer insert(TeraServer person) {
+        return persist(person);
+    }
 }

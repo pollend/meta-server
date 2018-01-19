@@ -16,8 +16,8 @@
 
 package org.terasology.web.services.geo.dbip;
 
-import retrofit.http.GET;
-import retrofit.http.Query;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /**
  * Maps the db-ip.com REST-ful API to a Java class.

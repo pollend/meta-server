@@ -21,8 +21,8 @@ import java.net.InetAddress;
 
 import org.terasology.web.services.geo.GeoLocation;
 import org.terasology.web.services.geo.GeoLocationService;
+import retrofit2.Retrofit;
 
-import retrofit.RestAdapter;
 
 /**
  * Resolves geo-location for a hostname or IP address based on db-ip.com.
@@ -31,22 +31,24 @@ import retrofit.RestAdapter;
 public class GeoLocationServiceDbIp implements GeoLocationService {
 
     private final String apiKey;
+    private final DbIpRestWrapper ipWrapper;
 
     public GeoLocationServiceDbIp(String apiKey) {
         this.apiKey = apiKey;
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.db-ip.com/")
+                .build();
+        ipWrapper = retrofit.create(DbIpRestWrapper.class);
+
     }
 
     @Override
     public GeoLocation resolve(String hostnameOrIp) throws IOException {
-        String url = "http://api.db-ip.com/";
-
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
-        DbIpRestWrapper service = restAdapter.create(DbIpRestWrapper.class);
 
         InetAddress inet = InetAddress.getByName(hostnameOrIp);
         String ipAddress = inet.getHostAddress();
 
-        DbIpQueryResponse response = service.getGeoLocation(ipAddress, apiKey);
+        DbIpQueryResponse response = ipWrapper.getGeoLocation(ipAddress, apiKey);
         if (response.isSuccess()) {
             return response;
         } else {

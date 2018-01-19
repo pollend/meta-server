@@ -4,6 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "artifactory")
-public class Artifactory {
+@Table(name = "tera_module_version")
+public class TeraModuleVersion {
 }
