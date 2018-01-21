@@ -13,7 +13,6 @@ public class DataAccessObjectModule {
         this.hibernate = hibernate;
     }
 
-
     @Provides
     public TeraServerDAO providerServerDAO(){
         return new TeraServerDAO(hibernate.getSessionFactory());

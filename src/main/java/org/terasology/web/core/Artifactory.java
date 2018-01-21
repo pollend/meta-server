@@ -2,64 +2,50 @@ package org.terasology.web.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "artifactory")
-public class TeraArtifactory {
-    public enum RepoType {
-        RELEASE(1),
-        SNAPSHOT(2);
-
-        private final long mask;
-
-        RepoType(long level) {
-            this.mask = level;
-        }
-
-        public long getMask() {
-            return mask;
-        }
-    }
-
+public class Artifactory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(value = "created_at", access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
     private long id;
 
     @Column(name = "created_at", nullable = false)
     @JsonProperty(value = "created_at", access = JsonProperty.Access.READ_ONLY)
     private Date createdAt;
 
-    @Column(name = "updated_at", nullable = false)
-    @JsonProperty(value = "updated_at", access = JsonProperty.Access.READ_ONLY)
-    private Date updatedAt;
-
     @Column(name = "base_url", nullable = false)
     @JsonProperty(value = "base_url", access = JsonProperty.Access.READ_ONLY)
     private String baseUrl;
 
-    @Column(name = "repo_name", nullable = false)
-    @JsonProperty(value = "repo_name", access = JsonProperty.Access.READ_ONLY)
-    private String repoName;
 
     @Column(name = "group", nullable = false)
     @JsonProperty(value = "group", access = JsonProperty.Access.READ_ONLY)
     private String group;
 
-    @Column(name = "type", nullable = false)
-    @JsonProperty(value = "type", access = JsonProperty.Access.READ_ONLY)
-    @Enumerated(EnumType.STRING)
-    private RepoType type;
+    @Column(name = "path", nullable = false)
+    @JsonProperty(value = "path", access = JsonProperty.Access.READ_ONLY)
+    private String path;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JsonProperty("modules")
+    private Set<Module> modules;
 
     public long getId() {
         return id;
@@ -69,21 +55,12 @@ public class TeraArtifactory {
         this.id = id;
     }
 
-
     public String getBaseUrl() {
         return baseUrl;
     }
 
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
-    }
-
-    public RepoType getType() {
-        return type;
-    }
-
-    public void setType(RepoType type) {
-        this.type = type;
     }
 
     public String getGroup() {
@@ -94,22 +71,6 @@ public class TeraArtifactory {
         this.group = group;
     }
 
-    public void setRepoName(String repoName) {
-        this.repoName = repoName;
-    }
-
-    public String getRepoName() {
-        return repoName;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -117,4 +78,30 @@ public class TeraArtifactory {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public Set<Module> getModules() {
+        return modules;
+    }
+
+    public boolean addModule(Module module){
+        modules.add(module);
+        module.setArtifactory(this);
+        return true;
+    }
+
+    public boolean removeModule(Module module){
+        modules.remove(module);
+        module.setArtifactory(null);
+        return true;
+    }
+
+
 }

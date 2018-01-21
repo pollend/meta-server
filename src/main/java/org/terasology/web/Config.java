@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.flyway.FlywayFactory;
+import org.terasology.web.factory.geo.GeoFactory;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -22,8 +23,8 @@ public class Config extends Configuration {
 
     @Valid
     @NotNull
-    @JsonProperty("geokey")
-    private String geoKey;
+    @JsonProperty("geo")
+    private GeoFactory geoFactory = new GeoFactory();
 
     @Valid
     @NotNull
@@ -42,8 +43,8 @@ public class Config extends Configuration {
         return serverSecrete;
     }
 
-    public String getGeoKey() {
-        return geoKey;
+    public GeoFactory getGeoFactory() {
+        return geoFactory;
     }
 }
 

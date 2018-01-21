@@ -27,7 +27,7 @@ import org.terasology.module.RemoteModuleExtension;
 import org.terasology.web.model.MetadataExtractor;
 
 /**
- * Reads metadata from metadata files as-is.
+ * Reads ArtifactoryFolder from ArtifactoryFolder files as-is.
  */
 public class DummyExtractor implements MetadataExtractor {
 
