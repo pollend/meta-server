@@ -7,5 +7,5 @@ public interface ArtifactoryService {
 
     void WalkDirectoryPath(Artifactory artifactory, String basePath,ArtifactoryPathHandler handler);
 
-    Artifactory getArtifactor(String uri);
+    Artifactory getArtifactor(String uri,String group);
 }

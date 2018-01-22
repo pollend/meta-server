@@ -12,9 +12,9 @@ import java.util.Set;
 public class ArtifactoryServiceImpl implements ArtifactoryService {
 
     @Override
-    public Artifactory getArtifactor(String uri) {
+    public Artifactory getArtifactor(String uri,String group) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(uri + "/api/storage")
+                .baseUrl(uri + "/api/storage/" + group )
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
         return retrofit.create(Artifactory.class);

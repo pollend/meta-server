@@ -23,7 +23,7 @@ import java.util.Date;
 public class TeraServer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(value =  "created_at", access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(value =  "id", access = JsonProperty.Access.READ_ONLY)
     private long id;
 
     @Column(name = "created_at", nullable = false)
@@ -38,13 +38,17 @@ public class TeraServer {
     @JsonProperty("name")
     private String name;
 
+    @Column(name = "owner", nullable = false,length = 256)
+    @JsonProperty("owner")
+    private String owner;
+
     @Column(name = "address", nullable = false,length = 256)
     @JsonProperty("address")
     private String address;
 
 
-    @Column(name = "address", nullable = false)
-    @JsonProperty("address")
+    @Column(name = "port", nullable = false)
+    @JsonProperty("port")
     private int port;
 
     @Column(name = "country", nullable = false)

@@ -1,17 +1,22 @@
 package org.terasology.web.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Sets;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "module")
@@ -21,10 +26,8 @@ public class Module {
     @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "artifactory_id", nullable = false, insertable = false, updatable = false)
-    @JsonProperty("artifactory")
-    private Artifactory artifactory;
+    @OneToOne(mappedBy = "module", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private Maven maven;
 
     @Column(name = "created_at", nullable = false)
     @JsonProperty(value = "created_at", access = JsonProperty.Access.READ_ONLY)
@@ -43,14 +46,6 @@ public class Module {
     private String displayName;
 
 
-    public Artifactory getArtifactory() {
-        return artifactory;
-    }
-
-    public void setArtifactory(Artifactory artifactory) {
-        this.artifactory = artifactory;
-    }
-
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
@@ -67,7 +62,6 @@ public class Module {
         return description;
     }
 
-    private List<MavenVersion> dependencies;
 
     public void setId(long id) {
         this.id = id;
@@ -89,7 +83,7 @@ public class Module {
         this.serverSideOnly = serverSideOnly;
     }
 
-    public boolean isServerSideOnly() {
+    public boolean getServerSideOnly() {
         return serverSideOnly;
     }
 

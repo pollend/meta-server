@@ -1,12 +1,11 @@
 package org.terasology.web.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Sets;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +33,6 @@ public class Artifactory {
     @JsonProperty(value = "base_url", access = JsonProperty.Access.READ_ONLY)
     private String baseUrl;
 
-
     @Column(name = "group", nullable = false)
     @JsonProperty(value = "group", access = JsonProperty.Access.READ_ONLY)
     private String group;
@@ -44,8 +42,9 @@ public class Artifactory {
     private String path;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JsonProperty("modules")
-    private Set<Module> modules;
+    @JsonProperty("maven")
+    private Set<Maven> mavenInstances = Sets.newHashSet();
+
 
     public long getId() {
         return id;
@@ -87,21 +86,20 @@ public class Artifactory {
         return path;
     }
 
-    public Set<Module> getModules() {
-        return modules;
+    public Set<Maven> getMavenInstances() {
+        return mavenInstances;
     }
 
-    public boolean addModule(Module module){
-        modules.add(module);
-        module.setArtifactory(this);
+    public boolean addMavenInstance(Maven maven) {
+        mavenInstances.add(maven);
+        maven.setArtifactory(this);
         return true;
     }
 
-    public boolean removeModule(Module module){
-        modules.remove(module);
-        module.setArtifactory(null);
+    public boolean removeMavenInstance(Maven maven) {
+        mavenInstances.remove(maven);
+        maven.setArtifactory(null);
         return true;
     }
-
 
 }
